@@ -11,9 +11,9 @@ function buttonNumber(id){
     return document.getElementById(id);
 }
 
-function addingEventHandler(){
+function addingEventHandler() {
     let btn = document.getElementsByClassName("button");
-    for(i = 0; i< btn.length; i++){
+    for(i = 0; i < btn.length; i++){
         btn[i].addEventListener("click", function(){
             let numberBtn = this.innerHTML;
             if(numberBtn == "C"){
