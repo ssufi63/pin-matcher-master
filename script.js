@@ -7,9 +7,6 @@ pinBtn.addEventListener("click", function(){
         document.getElementById("pinArea").value = fourDigitRandomPin;
 })
 
-function buttonNumber(id){
-    return document.getElementById(id);
-}
 
 function addingEventHandler() {
     let btn = document.getElementsByClassName("button");
@@ -17,16 +14,16 @@ function addingEventHandler() {
         btn[i].addEventListener("click", function(){
             let numberBtn = this.innerHTML;
             if(numberBtn == "C"){
-                buttonNumber("numbersArea").value = "";
+                document.getElementById("numbersArea").value = "";
             }
-            else if(numberBtn == "<") {
-                let numberBtn = buttonNumber("numbersArea").value;
+            else if(numberBtn == "&lt;") {
+                let numberBtn = document.getElementById("numbersArea").value;
                 let removeNumber = numberBtn.slice(0, -1);
-                buttonNumber("numbersArea").value = removeNumber;
+                document.getElementById("numbersArea").value = removeNumber;
 
             }
             else{
-                buttonNumber("numbersArea").value += numberBtn;
+                document.getElementById("numbersArea").value += numberBtn;
             }
         });
 
