@@ -1,5 +1,8 @@
-document.getElementById("hide-section").style.display = "none";
+// hide notify section
+document.getElementById("pinNotMatched").style.display = "none";
+document.getElementById("pinMatched").style.display = "none";
 
+// random pin generator
 let pinBtn = document.getElementById("randomPinGenerateBtn");
 pinBtn.addEventListener("click", function(){
         let randomPin = Math.random() * 8999 + 1000;
@@ -7,44 +10,45 @@ pinBtn.addEventListener("click", function(){
         document.getElementById("pinArea").value = fourDigitRandomPin;
 })
 
-
-function addingEventHandler() {
-    let btn = document.getElementsByClassName("button");
-    for(i = 0; i < btn.length; i++){
-        btn[i].addEventListener("click", function(){
-            let numberBtn = this.innerHTML;
-            if(numberBtn == "C"){
-                document.getElementById("numbersArea").value = "";
-            }
-            else if(numberBtn == "&lt;") {
-                let numberBtn = document.getElementById("numbersArea").value;
-                let removeNumber = numberBtn.slice(0, -1);
-                document.getElementById("numbersArea").value = removeNumber;
-
-            }
-            else{
-                document.getElementById("numbersArea").value += numberBtn;
-            }
-        });
-
+// button area
+function buttonNumber(id) {
+    return document.getElementById(id);
     }
+    function addingEventHandler() {
+    let btn = document.getElementsByClassName("button");
+    for (i = 0; i < btn.length; i++) {
+    btn[i].addEventListener("click", function (e) {
+    let numberBtn = e.target.innerHTML;
+    if (numberBtn === "C") {
+    return buttonNumber("numbersArea").value = ""; // clear all button
+    } 
+    else if (numberBtn === "&lt;") {
+    let areaNumber = document.getElementById("numbersArea");
+    return buttonNumber("numbersArea").value = areaNumber.value.slice(0, areaNumber.value.length - 1); // backspace button
+    } 
+    else {
+    buttonNumber("numbersArea").value += numberBtn; // number button
+    }
+    });
+    }
+    }
+    addingEventHandler();
 
-}
-
+// pin match section
 let count = 3;
 function matchThePin(){
-    let randomPin = buttonNumber("pinArea");
-    let typingPin = buttonNumber("numbersArea");
+    let randomPin = buttonNumber("pinArea").value;
+    let typingPin = buttonNumber("numbersArea").value;
 
-    if(randomPin == typingPin){
+    if(randomPin === typingPin){
         buttonNumber("pinMatched").style.display = "block";
     }
     else{ 
-        if(count == 1){
+        if(count === 1){
             document.getElementById("disableSubmit").disabled = true;
         }
         count--;
         document.querySelector("span").innerText = count;  
-        catchElement("pinNotMatched").style.display = "block";   
+        buttonNumber("pinNotMatched").style.display = "block";   
     }
 }
